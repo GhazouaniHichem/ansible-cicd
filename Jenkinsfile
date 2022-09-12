@@ -35,9 +35,9 @@ pipeline {
                         
                         remote.identityFile = keyfile 
                         stage('Remote SSH') {
-                            steps {
+                            
                                 sshCommand remote: remote, command: "ls -l", sudo: true
-                            }
+                            
                         }  
                         
                     
