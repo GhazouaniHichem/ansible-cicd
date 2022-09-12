@@ -33,8 +33,13 @@ pipeline {
                         remote.host = '13.38.136.194'
                         remote.allowAnyHosts = true
                         remote.user = 'ubuntu'
-                        remote.identityFile = keyfile    
-                        sshCommand remote: remote, command: "ls -lrt"
+                        remote.identityFile = keyfile 
+                        stage('Remote SSH') {
+                            steps {
+                                sshCommand remote: remote, command: "ls -lrt", sudo: true
+                            }
+                        }  
+                        
                     
                     }
 
