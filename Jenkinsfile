@@ -25,16 +25,16 @@ pipeline {
             steps {
                 script {
                     echo "Calling Ansible playbook to configure cicd server"
-                    def remote = [:]
-                    remote.name = "ansible-server"
-                    remote.host = "13.38.136.194"
-                    remote.allowAnyHosts = true
-                    remote.user = "ubuntu"
+                    
 
                     withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
-                        
+                        def remote = [:]
+                        remote.name = 'ansible-server'
+                        remote.host = '13.38.136.194'
+                        remote.allowAnyHosts = true
+                        remote.user = 'ubuntu'
                         remote.identityFile = keyfile    
-                        sshCommand remote: remote, command: "ls -l"
+                        sshCommand remote: remote, command: "ls -lrt"
                     
                     }
 
