@@ -33,7 +33,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: "cicd-server-key", keyFileVariable: 'keyfile', usernameVariable: 'ubuntu')]) {
                         remote.user = 'ubuntu'
                         remote.identityFile = keyfile  
-                        sshCommand remote: remote, command: "ansible-playbook /home/my-play.yaml"
+                        sshCommand remote: remote, command: "ansible-playbook home/my-play.yaml"
                     }
 
                 }
