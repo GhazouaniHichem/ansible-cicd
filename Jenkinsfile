@@ -6,7 +6,7 @@ pipeline {
     
     
     tools {
-        nodejs 'node-18.8'
+        nodejs 'node-18.9'
     }
     
     
