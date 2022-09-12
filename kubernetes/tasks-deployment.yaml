@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-deployment
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: tasks
+  template:
+    metadata:
+      labels:
+        app: tasks
+    spec:
+      containers:
+        - name: tasks
+          image: ghazouanihm/tasks-api:1.0
+          imagePullPolicy: Never
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service"
+            - name: TASKS_FOLDER
+              value: "tasks"
+          ports:
+            - containerPort: 5000

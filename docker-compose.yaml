@@ -1,0 +1,23 @@
+version: "3"
+services:
+  auth:
+    image: ghazouanihm/auth-api:1.0
+  users:
+    image: ghazouanihm/users-api:1.0
+    environment:
+      AUTH_ADDRESS: auth
+      AUTH_SERVICE_SERVICE_HOST: auth
+    ports: 
+      - "8080:8080"
+  tasks:
+    image: ghazouanihm/tasks-api:1.0
+    ports: 
+      - "5000:5000"
+    environment:
+      TASKS_FOLDER: tasks
+      AUTH_ADDRESS: auth
+  frontend:
+    image: ghazouanihm/frontend:1.0
+    ports: 
+      - "8050:8050"
+    
