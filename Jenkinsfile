@@ -30,9 +30,9 @@ pipeline {
                     remote.host = '13.38.136.194'
                     remote.allowAnyHosts = true
 
-                    withCredentials([sshUserPrivateKey(credentialsId: "cicd-server-key", keyFileVariable: 'keyfile', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfileauth', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
                         remote.user = ubuntu
-                        remote.identityFile = keyfile  
+                        remote.identityFile = keyfileauth  
                         sshCommand remote: remote, command: "ls -l"
                     }
 
