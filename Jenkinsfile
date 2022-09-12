@@ -12,9 +12,12 @@ pipeline {
             steps {
                 script {
                     echo "Copying all neccessary files to ansible control node"
-                    sshagent(['ansible-server-key']) {
+                    sshagent(credentials: ['ansible-server-key']) {
                         sh "scp -o StrictHostKeyChecking=no ansible/* ubuntu@13.38.136.194:/"
-                    }
+
+                    /*     withCredentials([sshUserPrivateKey(credentialsId: "cicd-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
+                            sh "scp ${keyfile} ec2-user"
+                    }*/
                 }
             }
         }
@@ -22,4 +25,6 @@ pipeline {
 
 
     }
+}
+
 }
