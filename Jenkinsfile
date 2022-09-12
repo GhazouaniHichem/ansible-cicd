@@ -16,14 +16,30 @@ pipeline {
                         sh "scp -o StrictHostKeyChecking=no ansible/* ubuntu@13.38.136.194:/home/ubuntu/home"
                         withCredentials([sshUserPrivateKey(credentialsId: "cicd-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
                             sh 'scp $keyfile ubuntu@13.38.136.194:/home/ubuntu/home/ssh-key.pem'
+                        }
                     }
                 }
             }
         }
+        stage("Execute Ansible playbook") {
+            steps {
+                script {
+                    echo "Calling Ansible playbook to configure cicd server"
+                    def remote = [:]
+                    remote.name = "ansible-server"
+                    remote.host = "13.38.136.194"
+                    remote.allowAnyHosts = true
 
+                    withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
+                        remote.user = user
+                        remote.identityFile = keyfile    
+                        sshCommand remote: remote, command: "ls -l"
+                    
+                    }
 
-
-    }
+                }
+            }
+        }
 }
 
 }
