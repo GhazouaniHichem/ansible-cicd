@@ -29,10 +29,10 @@ pipeline {
                     remote.name = 'ansible-server'
                     remote.host = '13.38.136.194'
                     remote.allowAnyHosts = true
-                    remote.user = 'ubuntu'
+                    
 
                     withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
-                        
+                        remote.user = user
                         remote.identityFile = keyfile 
                         stage('Remote SSH') {
                             
