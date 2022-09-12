@@ -26,11 +26,11 @@ pipeline {
                 script {
                     echo "Calling Ansible playbook to configure cicd server"
                     def remote = [:]
-                    remote.name = 'ansible-server'
-                    remote.host = '13.38.136.194'
+                    remote.name = 'jenkins-server'
+                    remote.host = '13.37.235.95'
                     remote.allowAnyHosts = true
 
-                    withCredentials([sshUserPrivateKey(credentialsId: 'ansible-server-key', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'cicd-server-key', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
                         remote.user = userName
                         remote.identityFile = identity
                         stage("SSH Steps Rocks!") {
