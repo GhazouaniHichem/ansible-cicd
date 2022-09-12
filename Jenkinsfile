@@ -13,7 +13,7 @@ pipeline {
                 script {
                     echo "Copying all neccessary files to ansible control node"
                     sshagent(['ansible-server-key']) {
-                        sh "scp -o StrictHostKEyCHecking=no ansible/* ubuntu@13.38.136.194:/home"
+                        sh "scp -o StrictHostKeyChecking=no ansible/* ubuntu@13.38.136.194:/home"
                     }
                 }
             }
