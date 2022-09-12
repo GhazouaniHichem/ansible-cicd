@@ -26,7 +26,7 @@ pipeline {
                 script {
                     echo "Calling Ansible playbook to configure cicd server"
                     def remote = [:]
-                    remote.name = 'jenkins-server'
+                    remote.name = 'ansible-server'
                     remote.host = '13.38.136.194'
                     remote.allowAnyHosts = true
 
