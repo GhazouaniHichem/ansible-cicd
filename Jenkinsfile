@@ -1,10 +1,6 @@
-def gv
-
 pipeline {
 
     agent any
-    
-    
     tools {
         nodejs 'node-18.9'
     }
@@ -12,30 +8,18 @@ pipeline {
     
     stages {
     
-        stage("init") {
+        stage("Copy ansible files to server") {
             steps {
                 script {
-                    gv = load "script.groovy"
+                    echo "Copying all neccessary files to ansible control node"
+                    sshagent(['ansible-server-key']) {
+                        sh "scp -o StrictHostKEyCHecking=no ansible/* ubuntu@13.38.136.194:/home"
+                    }
                 }
             }
         }
 
-    
-        stage("build image") {
-            steps {
-                script {
-                    gv.buildImage()
-                }
-            }
-        }
 
-    
-        stage("deploy") {
-            steps {
-                script {
-                    gv.deployApp()
-                }
-            }
-        }
+
     }
 }
