@@ -27,7 +27,7 @@ pipeline {
                     echo "Calling Ansible playbook to configure cicd server"
                     def remote = [:]
                     remote.name = 'ansible-server'
-                    remote.host = '13.38.136.194'
+                    remote.host = 'ubuntu@13.38.136.194'
                     remote.allowAnyHosts = true
 
                     withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfileauth', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
